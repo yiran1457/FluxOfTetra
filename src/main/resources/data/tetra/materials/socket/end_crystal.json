@@ -1,0 +1,26 @@
+{
+    "key": "socket_end_crystal",
+    "hidden": true,
+    "category": "socket",
+    "primary": 0,
+    "secondary": 0,
+    "tertiary": 0,
+    "durability": 0,
+    "integrityCost": 1,
+    "integrityGain": 0,
+    "magicCapacity": 0,
+    "toolLevel": 0,
+    "toolEfficiency": 0,
+    "effects": {
+        "fot:fe_store": 125000
+    },
+    "tints": {
+        "glyph": "bd9cf6",
+        "texture": "bd9cf6"
+    },
+    "textures": [ "default" ],
+    "experienceCost": 5,
+    "material": {
+        "items": [ "minecraft:end_crystal" ]
+    }
+}

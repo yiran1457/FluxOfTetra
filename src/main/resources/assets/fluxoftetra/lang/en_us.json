@@ -1,0 +1,10 @@
+{
+  "tooltip.fot.fe.format": "%s / %s FE",
+  "tetra.stats.fot:fe_store": "Fluxed",
+  "tetra.stats.fot:fe_store.tooltip": "The item will be able to store §e%s§r FE, which can be used to deduct durability consumption (%sFE=1 durability)",
+
+  "tetra.material.socket_end_crystal": "EndCrystal",
+  "tetra.material.socket_end_crystal.prefix": "§5EndCrystal§r",
+  "tetra.material.lightning_rod": "LightningRod",
+  "tetra.material.lightning_rod.prefix": "Lightning"
+}

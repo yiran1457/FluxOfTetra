@@ -1,0 +1,10 @@
+{
+  "tooltip.fot.fe.format": "§b%s§r §a/§r §b%s§r §aFE§r",
+  "tetra.stats.fot:fe_store": "通量注入",
+  "tetra.stats.fot:fe_store.tooltip": "物品将可以存储 §e%s§r 的FE,可以抵扣耐久消耗( %sFE=1耐久 )",
+
+  "tetra.material.socket_end_crystal": "末地水晶",
+  "tetra.material.socket_end_crystal.prefix": "§5末地水晶§r",
+  "tetra.material.lightning_rod": "避雷针",
+  "tetra.material.lightning_rod.prefix": "避雷"
+}
