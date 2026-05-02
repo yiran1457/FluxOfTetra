@@ -19,7 +19,8 @@ public class ItemRenderHandler {
     public static void onItemTooltip(ItemTooltipEvent event) {
         if (event.getFlags().isAdvanced()) {
             FEUtil.getTetraFEStore(event.getItemStack()).ifPresent(store -> {
-                event.getToolTip().add(1, Component.literal(I18n.get("tooltip.fot.fe.format", formatInt(store.getEnergyStored()), formatInt(store.getMaxEnergyStored()))));
+                if (store.getMaxEnergyStored() > 0)
+                    event.getToolTip().add(1, Component.literal(I18n.get("tooltip.fot.fe.format", formatInt(store.getEnergyStored()), formatInt(store.getMaxEnergyStored()))));
             });
         }
     }
@@ -35,6 +36,7 @@ public class ItemRenderHandler {
     public static boolean drawBar(GuiGraphics guiGraphics, Font font, ItemStack itemStack, int x, int y) {
         Optional<TetraFEStore> feStore = FEUtil.getTetraFEStore(itemStack);
         if (feStore.isEmpty()) return false;
+        if (feStore.get().getMaxEnergyStored() <= 0) return false;
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(x + 2, y + 12, 200);
         if (itemStack.getDamageValue() == 0) {

@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -22,13 +23,13 @@ public class FluxOfTetra {
     public FluxOfTetra() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-        if(FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.dist == Dist.CLIENT) {
             FluxOfTetraClient.init(modBus, forgeBus);
         }
 
-        FMLJavaModLoadingContext.get().registerConfig(ModConfig.Type.COMMON,Config.SPEC);
+        FMLJavaModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
-        forgeBus.addGenericListener(ItemStack.class,AttachCapability::attach);
-        forgeBus.addListener(DamageHook::onModularDamage);
+        forgeBus.addGenericListener(ItemStack.class, AttachCapability::attach);
+        forgeBus.addListener(EventPriority.LOWEST, DamageHook::onModularDamage);
     }
 }
