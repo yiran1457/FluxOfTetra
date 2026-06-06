@@ -56,12 +56,16 @@ public class TetraFEStore implements IEnergyStorage, INBTSerializable<CompoundTa
     //禁止提取能量
     @Override
     public boolean canExtract() {
-        return false;
+        return true;
     }
 
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
-        return 0;
+        int energyReceived = Math.min(this.getEnergyStored(), Math.min(this.maxReceive, maxExtract));
+        if (!simulate) {
+            this.setEnergyStored(this.energy - energyReceived);
+        }
+        return energyReceived;
     }
 
     @Override
