@@ -24,7 +24,7 @@ public class AttachCapability {
     public static boolean checkInCache(Item item) {
         if (!cache.containsKey(item)) {
             var key = ForgeRegistries.ITEMS.getKey(item).toString();
-            cache.put(item, Config.NotEnergyItems.get().contains(key));
+            cache.put(item, !Config.NotEnergyItems.get().contains(key));
         }
         return cache.getBoolean(item);
     }

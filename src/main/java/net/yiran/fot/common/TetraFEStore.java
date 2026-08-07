@@ -48,7 +48,11 @@ public class TetraFEStore implements IEnergyStorage, INBTSerializable<CompoundTa
     @Override
     public int getMaxEnergyStored() {
         if (this.capacity == -999) {
-            this.capacity = ((IModularItem) stack.getItem()).getEffectLevel(stack, FEItemEffects.FE_STORE);
+            if (stack.getItem() instanceof IModularItem iModularItem) {
+                this.capacity = iModularItem.getEffectLevel(stack, FEItemEffects.FE_STORE);
+            } else {
+                this.capacity = 0;
+            }
         }
         return this.capacity;
     }
