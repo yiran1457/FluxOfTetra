@@ -7,8 +7,9 @@ import se.mickelus.tetra.event.ModularItemDamageEvent;
 public class DamageHook {
     public static void onModularDamage(ModularItemDamageEvent event) {
         FEUtil.getTetraFEStore(event.getItemStack()).ifPresent(store -> {
-            int damage = Math.min(store.getEnergyStored() / Config.ForgeEnergy2Durability.get(), event.getAmount());
-            store.setEnergyStored(store.getEnergyStored() - damage * Config.ForgeEnergy2Durability.get());
+            int ratio = Config.forgeEnergy2Durability.get();
+            int damage = Math.min(store.getEnergyStored() / ratio, event.getAmount());
+            store.setEnergyStored(store.getEnergyStored() - damage * ratio);
             event.setAmount(event.getAmount() - damage);
         });
     }

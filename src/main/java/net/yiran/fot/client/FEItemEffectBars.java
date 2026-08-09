@@ -17,7 +17,7 @@ public class FEItemEffectBars {
                         0, 0, 59,
                         getEffectDesc(FEItemEffects.FE_STORE),
                         0, 1, false, false, false, levelStatGetter,
-                        LabelGetterBasic.integerLabel, new TooltipGetterFormatInt(getEffectTooltip(FEItemEffects.FE_STORE), levelStatGetter, Config.ForgeEnergy2Durability.get())
+                        LabelGetterBasic.integerLabel, new TooltipGetterFormatInt(getEffectTooltip(FEItemEffects.FE_STORE), levelStatGetter, Config.forgeEnergy2Durability.get())
                 ));
 
     }

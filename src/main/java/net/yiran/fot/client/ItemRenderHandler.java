@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class ItemRenderHandler {
     public static void onItemTooltip(ItemTooltipEvent event) {
-        if (event.getFlags().isAdvanced()) {
+        if (event.getFlags().isAdvanced() && event.getItemStack().getItem() instanceof IModularItem) {
             FEUtil.getTetraFEStore(event.getItemStack()).ifPresent(store -> {
                 if (store.getMaxEnergyStored() > 0)
                     event.getToolTip().add(1, Component.literal(I18n.get("tooltip.fot.fe.format", formatInt(store.getEnergyStored()), formatInt(store.getMaxEnergyStored()))));
@@ -34,9 +34,12 @@ public class ItemRenderHandler {
     }
 
     public static boolean drawBar(GuiGraphics guiGraphics, Font font, ItemStack itemStack, int x, int y) {
+        if (!(itemStack.getItem() instanceof IModularItem)) return false;
         Optional<TetraFEStore> feStore = FEUtil.getTetraFEStore(itemStack);
         if (feStore.isEmpty()) return false;
-        if (feStore.get().getMaxEnergyStored() <= 0) return false;
+        TetraFEStore store = feStore.get();
+        int max = store.getMaxEnergyStored();
+        if (max <= 0) return false;
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(x + 2, y + 12, 200);
         if (itemStack.getDamageValue() == 0) {
@@ -45,7 +48,7 @@ public class ItemRenderHandler {
             guiGraphics.fill(0, 0, 13, 1, 0, 0xff000000);
         }
 
-        guiGraphics.fill(0, 0, (13 * feStore.get().getEnergyStored()) / feStore.get().getMaxEnergyStored(), 1, 0, 0xFFFF0000);
+        guiGraphics.fill(0, 0, (int) ((13L * store.getEnergyStored()) / max), 1, 0, 0xFFFF0000);
         guiGraphics.pose().popPose();
         return true;
     }

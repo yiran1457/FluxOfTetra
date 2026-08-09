@@ -5,7 +5,7 @@ import net.yiran.fot.client.FEItemEffectBars;
 import net.yiran.fot.client.ItemRenderHandler;
 
 public class FluxOfTetraClient {
-    public static void init(IEventBus modBus,IEventBus forgeBus) {
+    public static void init(IEventBus modBus, IEventBus forgeBus) {
         modBus.addListener(ItemRenderHandler::onRegisterItemDecorations);
         forgeBus.addListener(ItemRenderHandler::onItemTooltip);
         modBus.addListener(FEItemEffectBars::onClientSetup);

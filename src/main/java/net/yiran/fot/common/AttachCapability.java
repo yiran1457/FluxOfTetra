@@ -11,21 +11,21 @@ import net.yiran.fot.FluxOfTetra;
 import se.mickelus.tetra.items.modular.IModularItem;
 
 public class AttachCapability {
-    public static ResourceLocation KEY = new ResourceLocation(FluxOfTetra.MODID, "fe");
-    public static Object2BooleanOpenHashMap<Item> cache = new Object2BooleanOpenHashMap<>();
+    private static final ResourceLocation KEY = new ResourceLocation(FluxOfTetra.MODID, "fe");
+    private static final Object2BooleanOpenHashMap<Item> CACHE = new Object2BooleanOpenHashMap<>();
 
     public static void attach(AttachCapabilitiesEvent<ItemStack> event) {
-        if (event.getObject().getItem() instanceof IModularItem) {
-            if (checkInCache(event.getObject().getItem()))
-                event.addCapability(KEY, new TetraFEProvider(event.getObject()));
+        Item item = event.getObject().getItem();
+        if (item instanceof IModularItem && checkInCache(item)) {
+            event.addCapability(KEY, new TetraFEProvider(event.getObject()));
         }
     }
 
-    public static boolean checkInCache(Item item) {
-        if (!cache.containsKey(item)) {
-            var key = ForgeRegistries.ITEMS.getKey(item).toString();
-            cache.put(item, !Config.NotEnergyItems.get().contains(key));
+    private static boolean checkInCache(Item item) {
+        if (!CACHE.containsKey(item)) {
+            String key = ForgeRegistries.ITEMS.getKey(item).toString();
+            CACHE.put(item, !Config.notEnergyItems.get().contains(key));
         }
-        return cache.getBoolean(item);
+        return CACHE.getBoolean(item);
     }
 }

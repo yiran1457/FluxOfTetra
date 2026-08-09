@@ -7,27 +7,26 @@ import se.mickelus.tetra.gui.stats.getter.IStatGetter;
 import se.mickelus.tetra.gui.stats.getter.ITooltipGetter;
 
 public class TooltipGetterFormatInt implements ITooltipGetter {
-    protected IStatGetter statGetter;
-    protected String localizationKey;
-    protected boolean absolute;
-    protected Object[] extraArgs;
+    protected final IStatGetter statGetter;
+    protected final String localizationKey;
+    protected final boolean absolute;
+    protected final Object[] extraArgs;
 
-    public TooltipGetterFormatInt(String localizationKey, IStatGetter statGetter, boolean absolute,Object... extraArgs) {
-        this(localizationKey, statGetter,extraArgs);
+    public TooltipGetterFormatInt(String localizationKey, IStatGetter statGetter, boolean absolute, Object... extraArgs) {
         this.absolute = absolute;
-    }
-
-    public TooltipGetterFormatInt(String localizationKey, IStatGetter statGetter, Object... extraArgs) {
-        this.absolute = false;
         this.localizationKey = localizationKey;
         this.statGetter = statGetter;
         this.extraArgs = extraArgs;
     }
 
+    public TooltipGetterFormatInt(String localizationKey, IStatGetter statGetter, Object... extraArgs) {
+        this(localizationKey, statGetter, false, extraArgs);
+    }
+
     public String getTooltipBase(Player player, ItemStack itemStack) {
         return this.absolute
-                ? I18n.get(this.localizationKey, ItemRenderHandler.formatInt((int) Math.abs(this.statGetter.getValue(player, itemStack))),extraArgs)
-                : I18n.get(this.localizationKey, ItemRenderHandler.formatInt((int) this.statGetter.getValue(player, itemStack)),extraArgs);
+                ? I18n.get(this.localizationKey, ItemRenderHandler.formatInt((int) Math.abs(this.statGetter.getValue(player, itemStack))), extraArgs)
+                : I18n.get(this.localizationKey, ItemRenderHandler.formatInt((int) this.statGetter.getValue(player, itemStack)), extraArgs);
     }
 
     public boolean hasExtendedTooltip(Player player, ItemStack itemStack) {

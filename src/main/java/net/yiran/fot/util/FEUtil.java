@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class FEUtil {
     public static Optional<TetraFEStore> getTetraFEStore(ItemStack stack) {
-        if (stack.getCapability(ForgeCapabilities.ENERGY).orElse(null) instanceof TetraFEStore store) {
+        if (stack.getCapability(ForgeCapabilities.ENERGY).resolve().orElse(null) instanceof TetraFEStore store) {
             return Optional.of(store);
         }
         return Optional.empty();
